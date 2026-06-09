@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   }
 
   const colleges = await prisma.college.findMany({
-    where: { OR: ids.map((id) => ({ slug: id })).concat(ids.map((id) => ({ id }))) },
+    where: { slug: { in: ids } },
     include: { courses: true },
   });
 
